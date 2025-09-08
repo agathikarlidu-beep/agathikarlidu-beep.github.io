@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tarot • Αστρικές Κάρτες</title>
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#121821; --ink:#e7f0f4; --muted:#a8b5bf;
+    --brand:#009688; --brand-2:#37b7a3; --accent:#ffc857; --danger:#ef476f;
+    --card:#0f1520; --shadow:rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:radial-gradient(1200px 800px at 10% 0%, #0f1520 0%, #0b0f14 40%, #070a0f 100%);color:var(--ink);font-family:Inter,system-ui,Arial,sans-serif}
+  .stars{position:fixed;inset:0;pointer-events:none;background:
+    radial-gradient(2px 2px at 14% 22%, rgba(255,255,255,.8) 40%, transparent 41%),
+    radial-gradient(1px 1px at 61% 18%, rgba(255,255,255,.6) 40%, transparent 41%),
+    radial-gradient(1.5px 1.5px at 83% 31%, rgba(255,255,255,.7) 40%, transparent 41%),
+    radial-gradient(1px 1px at 25% 77%, rgba(255,255,255,.5) 40%, transparent 41%),
+    radial-gradient(1.5px 1.5px at 72% 70%, rgba(255,255,255,.7) 40%, transparent 41%);
+    opacity:.35; filter:drop-shadow(0 0 6px rgba(255,255,255,.25));}
+  nav{position:sticky;top:0;z-index:10;background:linear-gradient(180deg, rgba(7,10,15,.9), rgba(7,10,15,.6));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 16px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.3px}
+  .logo-badge{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:conic-gradient(from 210deg,#0e3a3f,#0d6f66 35%,#1aa69a 70%,#0c3d45);
+    box-shadow:0 8px 24px var(--shadow), inset 0 0 16px rgba(255,255,255,.1)}
+  .logo-badge span{font-size:18px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+  .brand{color:#cff7ef}
+  main{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+  header.hero{display:grid;gap:14px;padding:20px 16px 10px}
+  header.hero h1{font-size:34px;margin:0;line-height:1.15}
+  header.hero p{margin:0;color:var(--muted)}
+  .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    border:1px solid rgba(255,255,255,.08); border-radius:18px; box-shadow:0 16px 40px var(--shadow)}
+  .controls{display:grid;gap:14px;padding:16px}
+  .row{display:flex;flex-wrap:wrap;gap:12px}
+  .field{flex:1 1 220px;display:grid;gap:6px}
+  label{font-size:.9rem;color:var(--muted)}
+  input,select,button{height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+    background:#0e1420;color:var(--ink);padding:0 12px;outline:none}
+  input:focus,select:focus{border-color:var(--brand)}
+  button{background:linear-gradient(180deg,var(--brand),var(--brand-2));border:none;font-weight:700}
+  button.secondary{background:#0e1420}
+  .spread{padding:18px}
+  .cards{display:grid;gap:16px;grid-template-columns:repeat(3, minmax(0,1fr))}
+  .card{background:linear-gradient(180deg,#0b1220,#0b0f18); border:1px solid rgba(255,255,255,.08);
+    border-radius:18px; padding:12px; box-shadow:0 12px 28px var(--shadow); display:grid;gap:10px}
+  .img{aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#0a0f18;display:grid;place-items:center}
+  .img img{width:100%;height:100%;object-fit:cover;display:block}
+  .img .ph{font-size:42px;opacity:.9}
+  .cap{display:flex;align-items:center;gap:8px}
+  .cap small{color:var(--muted)}
+  h3{margin:0;font-size:18px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:.75rem;color:#d7f5ef;background:rgba(0,150,136,.12);border:1px solid rgba(0,150,136,.35);
+    padding:4px 8px;border-radius:999px}
+  .mean{color:#cfe6f2;font-size:.98rem;line-height:1.4}
+  footer{margin-top:36px;color:var(--muted);text-align:center}
+  @media (max-width:860px){
+    header.hero h1{font-size:28px}
+    .cards{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<nav>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-badge"><span>♠</span></div>
+      <span class="brand">Astra • Tarot</span>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <header class="hero">
+    <h1>Αστρικές Κάρτες Ταρώ</h1>
+    <p>Δώσε ημερομηνία (και προαιρετικά όνομα) και πάρε ένα σταθερό «άνοιγμα» 3 καρτών — Παρελθόν • Παρόν • Μέλλον.</p>
+  </header>
+
+  <section class="panel controls">
+    <div class="row">
+      <div class="field">
+        <label for="date">Ημερομηνία</label>
+        <input id="date" type="date" />
+      </div>
+      <div class="field">
+        <label for="name">Όνομα (προαιρετικό)</label>
+        <input id="name" type="text" placeholder="π.χ. Agata" />
+      </div>
+      <div class="field" style="max-width:220px">
+        <label for="spread">Άνοιγμα</label>
+        <select id="spread">
+          <option value="3">3 Κάρτες — Παρελθόν / Παρόν / Μέλλον</option>
+          <option value="1">1 Κάρτα — Μήνυμα ημέρας</option>
+          <option value="5">5 Κάρτες — Σταυρός (σύντομα)</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <button id="drawBtn">Διάλεξε κάρτες</button>
+      <button id="randomBtn" class="secondary" title="Τυχαίο (μη σταθερό)">Τυχαίο Άνοιγμα</button>
+    </div>
+  </section>
+
+  <section class="panel spread">
+    <div id="legend" class="row" style="gap:10px;margin-bottom:12px;color:#cfe6f2"></div>
+    <div id="cards" class="cards"></div>
+  </section>
+
+  <footer>
+    <p>Φτιάχτηκε για εσένα · Προσάρμοσε την τράπουλα στο κάτω μέρος του κώδικα (με εικόνες & κείμενα δικά σου).</p>
+  </footer>
+</main>
+
+<script>
+/* ============== 1) ΤΡΑΠΟΥΛΑ – ΔΙΚΗ ΣΟΥ ΕΠΕΞΕΡΓΑΣΙΑ ============== */
+/* Πρόσθεσε/αφαίρεσε κάρτες. Για εικόνες:
+   - Ανεβάζεις jpg/png στο repo σου (π.χ. /img/mycard.jpg)
+   - Παίρνεις το raw URL και το βάζεις στο image.
+   - Αν δεν βάλεις image, θα εμφανιστεί σύμβολο/gradient. */
+const DECK = [
+  {
+    id:"star-moon", title:"Σελήνη των Άστρων",
+    emoji:"🌙", image:"",
+    keywords:["Διαισθηση","Όνειρα","Βάθος"],
+    meaning:"Άκου το ένστικτό σου· η διαίσθηση φωτίζει όσα ο νους θολώνει."
+  },
+  {
+    id:"forge", title:"Το Αμόνι",
+    emoji:"⚒️", image:"",
+    keywords:["Δημιουργία","Εστίαση","Υπομονή"],
+    meaning:"Η ουσία χτίζεται με μικρά, σταθερά χτυπήματα· μείνε στο έργο."
+  },
+  {
+    id:"voyage", title:"Το Ταξίδι",
+    emoji:"⛵", image:"",
+    keywords:["Κίνηση","Μετάβαση","Ορίζοντας"],
+    meaning:"Άφησε ήπια το παρελθόν· μπροστά ανοίγεται νέος ορίζοντας."
+  },
+  {
+    id:"mirror", title:"Ο Καθρέφτης",
+    emoji:"🪞", image:"",
+    keywords:["Αυτογνωσία","Αλήθεια","Ευθυγράμμιση"],
+    meaning:"Ό,τι ζητάς απ’ έξω, πρώτα το κοίτα μέσα σου. Η αλήθεια ισορροπεί."
+  },
+  {
+    id:"cat", title:"Η Μαύρη Γάτα",
+    emoji:"🐈‍⬛", image:"",
+    keywords:["Μυστήριο","Προστασία","Ανεξαρτησία"],
+    meaning:"Προστάτευσε την ενέργειά σου· διάλεξε με ποιους μοιράζεσαι φως."
+  },
+  {
+    id:"tempo", title:"Ο Χρόνος",
+    emoji:"⌛", image:"",
+    keywords:["Κύκλοι","Ρυθμός","Ωρίμανση"],
+    meaning:"Δεν βιάζεται το ώριμο· δώσε χρόνο να δέσει αυτό που ξεκινά."
+  },
+  {
+    id:"phoenix", title:"Φοίνικας",
+    emoji:"🔥", image:"",
+    keywords:["Ανανέωση","Μεταμόρφωση","Θάρρος"],
+    meaning:"Από τις στάχτες γεννιέται νέα δύναμη. Αποδέξου την αλλαγή."
+  },
+  {
+    id:"union", title:"Ένωσις",
+    emoji:"♾️", image:"",
+    keywords:["Σύνδεση","Ισορροπία","Συνεργία"],
+    meaning:"Το μισό βρίσκει το μισό· η αρμονία φέρνει πολλαπλασιασμό."
+  }
+];
+
+/* ============== 2) SEED & RNG (deterministic) ============== */
+function hashString(str){
+  // djb2
+  let h=5381; for(let i=0;i<str.length;i++){ h=((h<<5)+h) + str.charCodeAt(i); h|=0; }
+  return (h>>>0);
+}
+function mulberry32(a){
+  return function(){
+    let t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ t>>>15, t | 1);
+    t ^= t + Math.imul(t ^ t>>>7, t | 61);
+    return ((t ^ t>>>14) >>> 0) / 4294967296;
+  }
+}
+function seededShuffle(arr, seed){
+  const rand = mulberry32(seed);
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(rand()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ============== 3) UI LOGIC ============== */
+const cardsEl = document.getElementById('cards');
+const legendEl = document.getElementById('legend');
+const dateEl = document.getElementById('date');
+const nameEl = document.getElementById('name');
+const spreadEl = document.getElementById('spread');
+const drawBtn = document.getElementById('drawBtn');
+const randomBtn = document.getElementById('randomBtn');
+
+const SPREADS = {
+  "1": ["Μήνυμα Ημέρας"],
+  "3": ["Παρελθόν","Παρόν","Μέλλον"],
+  "5": ["Θέμα","Πρόκληση","Ρίζα","Συμβουλή","Έκβασις"]
+};
+
+function render(cards, labels){
+  legendEl.innerHTML = labels.map((l,i)=>`<span style="opacity:.85">${i+1}. ${l}</span>`).join(" · ");
+  cardsEl.innerHTML = cards.map((c,i)=> `
+    <article class="card">
+      <div class="img">
+        ${c.image ? `<img src="${c.image}" alt="${c.title}">` : `<div class="ph">${c.emoji||"🜂"}</div>`}
+      </div>
+      <div class="cap">
+        <small>${labels[i]||""}</small>
+      </div>
+      <h3>${c.title}</h3>
+      <div class="tags">
+        ${(c.keywords||[]).map(k=>`<span class="tag">${k}</span>`).join("")}
+      </div>
+      <p class="mean">${c.meaning||""}</p>
+    </article>
+  `).join("");
+}
+
+function drawDeterministic(){
+  const d = dateEl.value || new Date().toISOString().slice(0,10);
+  const n = (nameEl.value||"").trim();
+  const key = d + "|" + n;
+  const seed = hashString(key);
+  const num = parseInt(spreadEl.value,10);
+  const labels = SPREADS[num];
+  const shuffled = seededShuffle(DECK, seed);
+  render(shuffled.slice(0,num), labels);
+}
+
+function drawRandom(){
+  const num = parseInt(spreadEl.value,10);
+  const labels = SPREADS[num];
+  const shuffled = seededShuffle(DECK, Math.floor(Math.random()*1e9));
+  render(shuffled.slice(0,num), labels);
+}
+
+drawBtn.addEventListener('click', drawDeterministic);
+randomBtn.addEventListener('click', drawRandom);
+
+// Ένα πρώτο render για ομορφιά
+drawDeterministic();
+</script>
+</body>
+</html>
