@@ -1,4 +1,5 @@
-             <!DOCTYPE html>
+             
+      <!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8">
@@ -10,7 +11,7 @@
       margin: 0;
       font-family: Georgia, serif;
       background: black;
-      color: #FFD700;
+      color: #e6c34d; /* πιο απαλό χρυσό */
       text-align: center;
       overflow-x: hidden;
     }
@@ -33,7 +34,7 @@
       padding: 20px;
       font-size: 2em;
       font-weight: bold;
-      text-shadow: 0 0 20px rgba(255,215,0,0.8);
+      text-shadow: 0 0 12px rgba(230,195,77,0.6);
     }
 
     nav {
@@ -41,17 +42,17 @@
     }
     nav a {
       text-decoration: none;
-      color: #FFD700;
-      border: 1px solid #FFD700;
+      color: #e6c34d;
+      border: 1px solid #e6c34d;
       padding: 8px 15px;
       margin: 5px;
       border-radius: 8px;
       display: inline-block;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       transition: 0.3s;
     }
     nav a:hover {
-      background: #FFD700;
+      background: #e6c34d;
       color: black;
     }
 
@@ -60,25 +61,43 @@
     }
     h2 {
       margin-bottom: 20px;
-      text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      text-shadow: 0 0 10px rgba(230,195,77,0.5);
     }
     .gallery img {
       max-width: 80%;
       margin: 20px auto;
       display: block;
       border-radius: 10px;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+      box-shadow: 0 0 18px rgba(230,195,77,0.6);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
     }
+    .gallery img.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gallery p, .quote {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .gallery p.show, .quote.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .quote {
       font-style: italic;
       color: #ccc;
       margin: 15px 0;
-      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      text-shadow: 0 0 8px rgba(255,255,255,0.4);
     }
+
     footer {
       margin: 40px 0 20px;
       font-size: 0.9em;
-      text-shadow: 0 0 10px rgba(255,215,0,0.6);
+      text-shadow: 0 0 8px rgba(230,195,77,0.5);
     }
   </style>
 </head>
@@ -118,11 +137,25 @@
   <section id="contact">
     <h2>Επικοινωνία</h2>
     <p>Μπορείς να επικοινωνήσεις μαζί μου στο:</p>
-    <p><a href="mailto:Agathikarlidu@gmail.com" style="color:#FFD700;">Agathikarlidu@gmail.com</a></p>
+    <p><a href="mailto:Agathikarlidu@gmail.com" style="color:#e6c34d;">Agathikarlidu@gmail.com</a></p>
   </section>
 
   <footer>
     © 2025 Αγατα Καρλ — Νύχτα & Αστέρια
   </footer>
+
+  <script>
+    // Fade-in όταν γίνεται scroll
+    const elements = document.querySelectorAll('.gallery img, .gallery p, .quote');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
