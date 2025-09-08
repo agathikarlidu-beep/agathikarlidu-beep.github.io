@@ -1,118 +1,128 @@
-         <!DOCTYPE html>
+             <!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Αгата Карл — Νύχτα & Αστέρια</title>
+  <title>Αγατα Καρλ — Νύχτα & Αστέρια</title>
   <style>
+    /* Φόντο με κινούμενα αστέρια */
     body {
       margin: 0;
-      font-family: 'Georgia', serif;
-      background: #000 url('https://agathikarlidu-beep.github.io/img/file_00000000eeac61f59f174b574cf32a2d.png') no-repeat top center;
-      background-size: cover;
-      color: #f5f5f5;
-    }
-    header {
+      font-family: Georgia, serif;
+      background: black;
+      color: #FFD700;
       text-align: center;
-      padding: 2rem 1rem;
-      background: rgba(0,0,0,0.6);
+      overflow-x: hidden;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      color: gold;
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: black url("https://www.transparenttextures.com/patterns/stardust.png");
+      animation: moveStars 60s linear infinite;
+      z-index: -1;
     }
+
+    @keyframes moveStars {
+      from {background-position: 0 0;}
+      to {background-position: -10000px 5000px;}
+    }
+
+    header {
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 0 0 20px rgba(255,215,0,0.8);
+    }
+
     nav {
-      margin: 1rem 0;
+      margin: 20px 0;
     }
     nav a {
-      margin: 0 10px;
-      padding: 8px 15px;
-      background: rgba(255, 215, 0, 0.1);
-      border: 1px solid gold;
-      border-radius: 8px;
       text-decoration: none;
-      color: gold;
-      transition: background 0.3s;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 8px;
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.6);
+      transition: 0.3s;
     }
     nav a:hover {
-      background: gold;
+      background: #FFD700;
       color: black;
     }
+
     section {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: rgba(0,0,0,0.6);
-      border-radius: 12px;
+      margin: 40px 20px;
     }
-    section h2 {
-      color: gold;
-      text-align: center;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+    h2 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
     }
     .gallery img {
-      width: 100%;
-      border-radius: 12px;
+      max-width: 80%;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
     }
     .quote {
       font-style: italic;
-      text-align: center;
-      margin-top: 1rem;
-      color: #ddd;
+      color: #ccc;
+      margin: 15px 0;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
     footer {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(0,0,0,0.8);
-      color: #aaa;
+      margin: 40px 0 20px;
+      font-size: 0.9em;
+      text-shadow: 0 0 10px rgba(255,215,0,0.6);
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Агата Карл</h1>
-    <nav>
-      <a href="#about">Σχετικά</a>
-      <a href="#gallery">Φωτογραφίες</a>
-      <a href="#contact">Επικοινωνία</a>
-    </nav>
-  </header>
+  <div class="stars"></div>
+
+  <header>Αγατα Καρλ</header>
+  <nav>
+    <a href="#about">Σχετικά</a>
+    <a href="#photos">Φωτογραφίες</a>
+    <a href="#contact">Επικοινωνία</a>
+  </nav>
 
   <section id="about">
     <h2>Σχετικά</h2>
-    <p>Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. 
-       Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.</p>
+    <p>
+      Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. 
+      Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και κειμένων 
+      με μυστικιστική αισθητική.
+    </p>
   </section>
 
-  <section id="gallery">
+  <section id="photos">
     <h2>Φωτογραφίες</h2>
     <div class="gallery">
-      <div>
-        <img src="https://agathikarlidu-beep.github.io/img/file_0000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
-      </div>
-      <div>
-        <img src="https://agathikarlidu-beep.github.io/img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" alt="Στη θάλασσα">
-        <p class="quote">«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</p>
-      </div>
-      <div>
-        <img src="https://agathikarlidu-beep.github.io/img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Λογότυπο με γάτα και φεγγάρι">
-      </div>
+      <img src="https://agathikarlidu-beep.github.io/img/img/file_0000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
+      <p>Άγγελος και Δαίμονας</p>
+
+      <img src="https://agathikarlidu-beep.github.io/img/img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" alt="Στη Θάλασσα">
+      <p class="quote">«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</p>
+
+      <img src="https://agathikarlidu-beep.github.io/img/img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Λογότυπο με γάτα και φεγγάρι">
+      <p>Λογότυπο με γάτα και φεγγάρι</p>
     </div>
   </section>
 
   <section id="contact">
     <h2>Επικοινωνία</h2>
     <p>Μπορείς να επικοινωνήσεις μαζί μου στο:</p>
-    <p><a href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
+    <p><a href="mailto:Agathikarlidu@gmail.com" style="color:#FFD700;">Agathikarlidu@gmail.com</a></p>
   </section>
 
   <footer>
-    <p>© 2025 Агата Карл — Νύχτα & Αστέρια</p>
+    © 2025 Αγατα Καρλ — Νύχτα & Αστέρια
   </footer>
 </body>
 </html>
