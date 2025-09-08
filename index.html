@@ -1,185 +1,118 @@
    <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Агата Карл — Νύχτα & Αστέρια</title>
-  <meta name="description" content="Προσωπική σελίδα της Агата Карл — εικόνες, λέξεις και μυστικιστική αισθητική.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Αгата Карл — Νύχτα & Αστέρια</title>
   <style>
-    :root{
-      --bg1:#05060a; --bg2:#0b1220; --ink:#eae7df; --muted:#b9b6ad;
-      --gold:#d4af37; --teal:#7fd1c9; --glass:rgba(255,255,255,.06);
-      --stroke:rgba(255,255,255,.12); --shadow:0 16px 38px rgba(0,0,0,.45);
-      --r:18px;
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: #000 url('https://agathikarlidu-beep.github.io/img/file_00000000eeac61f59f174b574cf32a2d.png') no-repeat top center;
+      background-size: cover;
+      color: #f5f5f5;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{
-      color:var(--ink);
-      font:400 16px/1.6 Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 70% -10%, #0f1b2e 0%, transparent 60%) fixed,
-                  linear-gradient(180deg, var(--bg1), var(--bg2)) fixed;
-      overflow-x:hidden;
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(0,0,0,0.6);
     }
-    /* soft star layer */
-    .stars{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
-      background:
-        radial-gradient(2px 2px at 14% 22%, #fff 45%, transparent 46%),
-        radial-gradient(1.3px 1.3px at 61% 18%, #ffd88a 45%, transparent 46%),
-        radial-gradient(1px 1px at 83% 31%, #cfe0ff 45%, transparent 46%),
-        radial-gradient(1px 1px at 25% 77%, #fff 45%, transparent 46%),
-        radial-gradient(1.4px 1.4px at 72% 70%, #d6ecff 45%, transparent 46%);
-      animation: drift 200s linear infinite;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,.24));
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: gold;
     }
-    @keyframes drift{to{background-position:2000px 0}}
-
-    /* header / nav */
-    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px) saturate(140%);
-      background:linear-gradient(180deg, rgba(5,6,10,.85), rgba(5,6,10,.45));
-      border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:16px;align-items:center}
-    .brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.3px}
-    .brand-dot{width:40px;height:40px;border-radius:999px;background:
-      radial-gradient(circle at 35% 35%, #ffd88a 0%, #d4af37 40%, #715c19 76%);
-      box-shadow:0 0 0 3px rgba(212,175,55,.18), 0 8px 20px rgba(0,0,0,.45)}
-    .brand span{background:linear-gradient(90deg,var(--gold),var(--teal));
-      -webkit-background-clip:text;background-clip:text;color:transparent}
-    nav{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
-    nav a{color:#d7d5cd;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.02)}
-    nav a:hover{border-color:rgba(255,255,255,.22);color:#fff}
-    nav a.btn{background:linear-gradient(90deg,var(--gold),#f1d08b);color:#0b1418;border:0;box-shadow:0 10px 18px rgba(212,175,55,.18)}
-
-    .wrap{max-width:1100px;margin:0 auto;padding:24px 16px}
-    .hero{margin-top:28px}
-    .hero-card{position:relative;border-radius:var(--r);border:1px solid var(--stroke);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));box-shadow:var(--shadow);padding:36px;text-align:center;overflow:hidden}
-    .hero .moon{position:absolute;top:-80px;right:-100px;width:380px;height:380px;border-radius:50%;
-      background:radial-gradient(circle at 50% 50%, #f6f0c7 0%, #e3d99f 40%, rgba(230,210,130,.2) 60%, transparent 70%);
-      filter:blur(4px);opacity:.18;pointer-events:none}
-    .hero h1{margin:0 0 10px;font-size:clamp(30px,5.5vw,56px);text-shadow:0 6px 24px rgba(0,0,0,.55)}
-    .hero p{margin:0;color:var(--muted)}
-
-    /* photo with overlay quote */
-    .photo-quote{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--stroke);box-shadow:var(--shadow);margin-top:22px}
-    .photo-quote img{width:100%;display:block;height:min(70vh,620px);object-fit:cover}
-    .photo-quote .overlay{
-      position:absolute;left:50%;bottom:20px;transform:translateX(-50%);
-      background:rgba(0,0,0,.50);color:#f5f5f5;font-family:Georgia,serif;
-      padding:12px 20px;border-radius:10px;font-size:clamp(16px,2.4vw,22px);text-align:center;
-      box-shadow:0 8px 20px rgba(0,0,0,.45)
+    nav {
+      margin: 1rem 0;
     }
-
-    /* split wings (angel/demon) */
-    .wings{margin-top:28px;display:grid;gap:16px}
-    .wings .card{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--stroke);box-shadow:var(--shadow);min-height:320px}
-    .wings .left,.wings .right{position:absolute;inset:0;background-size:cover;background-position:center}
-    /* αριστερό: λευκό φτερό, fade προς το κέντρο */
-    .wings .left{
-      background-image:url('https://images.unsplash.com/photo-1547093861-7fef92e2f0b2?q=80&w=1600&auto=format&fit=crop');
-      -webkit-mask-image:linear-gradient(to right, #000 55%, transparent 95%);
-              mask-image:linear-gradient(to right, #000 55%, transparent 95%);
-      filter:saturate(105%) brightness(1.05)
+    nav a {
+      margin: 0 10px;
+      padding: 8px 15px;
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid gold;
+      border-radius: 8px;
+      text-decoration: none;
+      color: gold;
+      transition: background 0.3s;
     }
-    /* δεξί: μαύρο/σκούρο φτερό, fade προς το κέντρο */
-    .wings .right{
-      background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop');
-      -webkit-mask-image:linear-gradient(to left, #000 55%, transparent 95%);
-              mask-image:linear-gradient(to left, #000 55%, transparent 95%);
-      filter:saturate(105%) contrast(1.05) brightness(.88)
+    nav a:hover {
+      background: gold;
+      color: black;
     }
-    .wings h3{position:absolute;left:50%;top:16px;transform:translateX(-50%);margin:0;font-size:20px;background:rgba(0,0,0,.45);padding:8px 12px;border-radius:10px}
-
-    /* small gallery */
-    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:22px}
-    .card{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
-    .card img{width:100%;height:200px;object-fit:cover;display:block}
-    .card .cap{padding:12px;color:#dcd9cf}
-
-    footer{border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.35);margin-top:36px}
-    .footer-in{max-width:1100px;margin:0 auto;padding:24px 16px 44px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap}
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+    }
+    section h2 {
+      color: gold;
+      text-align: center;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+    }
+    .quote {
+      font-style: italic;
+      text-align: center;
+      margin-top: 1rem;
+      color: #ddd;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0,0,0,0.8);
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
-  <div class="stars" aria-hidden="true"></div>
-
   <header>
-    <div class="nav">
-      <a class="brand" href="#top" aria-label="Αρχική">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span>Агата Карл</span>
-      </a>
-      <nav>
-        <a href="#about">Σχετικά</a>
-        <a href="#gallery">Φωτογραφίες</a>
-        <a href="tarot.html" target="_blank" rel="noopener">Ταρώ</a>
-        <a class="btn" href="#contact">Επικοινωνία</a>
-      </nav>
-    </div>
+    <h1>Агата Карл</h1>
+    <nav>
+      <a href="#about">Σχετικά</a>
+      <a href="#gallery">Φωτογραφίες</a>
+      <a href="#contact">Επικοινωνία</a>
+    </nav>
   </header>
 
-  <main class="wrap" id="top">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-card">
-        <div class="moon" aria-hidden="true"></div>
-        <h1>Νύχτα. Αστέρια. Ιστορίες.</h1>
-        <p>Εικόνες & λέξεις με μυστικιστική ανάσα.</p>
-      </div>
+  <section id="about">
+    <h2>Σχετικά</h2>
+    <p>Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. 
+       Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.</p>
+  </section>
 
-      <!-- ΦΩΤΟ με QUOTE ΠΑΝΩ -->
-      <div class="photo-quote" id="about">
-        <!-- Θάλασσα / περπάτημα: άλλαξέ το με δική σου φωτογραφία όταν θες -->
-        <img src="https://images.unsplash.com/photo-1500099817043-86d46000d58f?q=80&w=1600&auto=format&fit=crop" alt="Περπάτημα προς τον ορίζοντα δίπλα στη θάλασσα">
-        <div class="overlay">«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</div>
+  <section id="gallery">
+    <h2>Φωτογραφίες</h2>
+    <div class="gallery">
+      <div>
+        <img src="https://agathikarlidu-beep.github.io/img/file_0000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
       </div>
-    </section>
+      <div>
+        <img src="https://agathikarlidu-beep.github.io/img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" alt="Στη θάλασσα">
+        <p class="quote">«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</p>
+      </div>
+      <div>
+        <img src="https://agathikarlidu-beep.github.io/img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Λογότυπο με γάτα και φεγγάρι">
+      </div>
+    </div>
+  </section>
 
-    <!-- ΦΤΕΡΑ: μισό άγγελος / μισό δαίμονας -->
-    <section class="wings" aria-label="Άγγελος & Δαίμονας">
-      <div class="card">
-        <h3>Angel ✧ Demon</h3>
-        <div class="left" aria-hidden="true"></div>
-        <div class="right" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" aria-label="Φωτογραφίες">
-      <div class="grid">
-        <figure class="card">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" alt="Νυχτερινός ουρανός με αστέρια">
-          <figcaption class="cap">Γαλαξίας</figcaption>
-        </figure>
-        <figure class="card">
-          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop" alt="Θάλασσα στο σούρουπο">
-          <figcaption class="cap">Θάλασσα & Σελήνη</figcaption>
-        </figure>
-        <figure class="card">
-          <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1600&auto=format&fit=crop" alt="Φώτα πόλης τη νύχτα">
-          <figcaption class="cap">Σιωπηλή Πόλη</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="wrap" style="padding:0;margin-top:22px">
-      <div class="card" style="padding:18px">
-        <p>Θες να πεις ένα γεια; Γράψε μου:</p>
-        <p><a href="mailto:hello@yourdomain.tld" style="display:inline-block;padding:10px 16px;border-radius:999px;text-decoration:none;background:linear-gradient(90deg,var(--gold),#f1d08b);color:#0b1418;font-weight:800">hello@yourdomain.tld</a></p>
-        <p style="color:var(--muted)">Άλλαξε τη διεύθυνση email στο HTML.</p>
-      </div>
-    </section>
-  </main>
+  <section id="contact">
+    <h2>Επικοινωνία</h2>
+    <p>Μπορείς να επικοινωνήσεις μαζί μου στο:</p>
+    <p><a href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
+  </section>
 
   <footer>
-    <div class="footer-in">
-      <span>© <span id="y"></span> Агата Карл</span>
-      <span>Designed with ☾ & ✦</span>
-    </div>
+    <p>© 2025 Агата Карл — Νύχτα & Αστέρια</p>
   </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
