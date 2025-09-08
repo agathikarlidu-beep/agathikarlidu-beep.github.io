@@ -38,5 +38,148 @@
     header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px) saturate(140%);
       background:linear-gradient(180deg, rgba(5,6,10,.85), rgba(5,6,10,.45));
       border-bottom:1px solid rgba(255,255,255,.08)}
-    .nav{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:16px;   
-        
+    .nav{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:16px;align-items:center}
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.3px}
+    .brand-dot{width:40px;height:40px;border-radius:999px;background:
+      radial-gradient(circle at 35% 35%, #ffd88a 0%, #d4af37 40%, #715c19 76%);
+      box-shadow:0 0 0 3px rgba(212,175,55,.18), 0 8px 20px rgba(0,0,0,.45)}
+    .brand span{background:linear-gradient(90deg,var(--gold),var(--teal));
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+    nav{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:#d7d5cd;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.02)}
+    nav a:hover{border-color:rgba(255,255,255,.22);color:#fff}
+    nav a.btn{background:linear-gradient(90deg,var(--gold),#f1d08b);color:#0b1418;border:0;box-shadow:0 10px 18px rgba(212,175,55,.18)}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:24px 16px}
+    .hero{margin-top:28px}
+    .hero-card{position:relative;border-radius:var(--r);border:1px solid var(--stroke);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));box-shadow:var(--shadow);padding:36px;text-align:center;overflow:hidden}
+    .hero .moon{position:absolute;top:-80px;right:-100px;width:380px;height:380px;border-radius:50%;
+      background:radial-gradient(circle at 50% 50%, #f6f0c7 0%, #e3d99f 40%, rgba(230,210,130,.2) 60%, transparent 70%);
+      filter:blur(4px);opacity:.18;pointer-events:none}
+    .hero h1{margin:0 0 10px;font-size:clamp(30px,5.5vw,56px);text-shadow:0 6px 24px rgba(0,0,0,.55)}
+    .hero p{margin:0;color:var(--muted)}
+
+    /* photo with overlay quote */
+    .photo-quote{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--stroke);box-shadow:var(--shadow);margin-top:22px}
+    .photo-quote img{width:100%;display:block;height:min(70vh,620px);object-fit:cover}
+    .photo-quote .overlay{
+      position:absolute;left:50%;bottom:20px;transform:translateX(-50%);
+      background:rgba(0,0,0,.50);color:#f5f5f5;font-family:Georgia,serif;
+      padding:12px 20px;border-radius:10px;font-size:clamp(16px,2.4vw,22px);text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.45)
+    }
+
+    /* split wings (angel/demon) */
+    .wings{margin-top:28px;display:grid;gap:16px}
+    .wings .card{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--stroke);box-shadow:var(--shadow);min-height:320px}
+    .wings .left,.wings .right{position:absolute;inset:0;background-size:cover;background-position:center}
+    /* αριστερό: λευκό φτερό, fade προς το κέντρο */
+    .wings .left{
+      background-image:url('https://images.unsplash.com/photo-1547093861-7fef92e2f0b2?q=80&w=1600&auto=format&fit=crop');
+      -webkit-mask-image:linear-gradient(to right, #000 55%, transparent 95%);
+              mask-image:linear-gradient(to right, #000 55%, transparent 95%);
+      filter:saturate(105%) brightness(1.05)
+    }
+    /* δεξί: μαύρο/σκούρο φτερό, fade προς το κέντρο */
+    .wings .right{
+      background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop');
+      -webkit-mask-image:linear-gradient(to left, #000 55%, transparent 95%);
+              mask-image:linear-gradient(to left, #000 55%, transparent 95%);
+      filter:saturate(105%) contrast(1.05) brightness(.88)
+    }
+    .wings h3{position:absolute;left:50%;top:16px;transform:translateX(-50%);margin:0;font-size:20px;background:rgba(0,0,0,.45);padding:8px 12px;border-radius:10px}
+
+    /* small gallery */
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:22px}
+    .card{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+    .card img{width:100%;height:200px;object-fit:cover;display:block}
+    .card .cap{padding:12px;color:#dcd9cf}
+
+    footer{border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.35);margin-top:36px}
+    .footer-in{max-width:1100px;margin:0 auto;padding:24px 16px 44px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="Αρχική">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Агата Карл</span>
+      </a>
+      <nav>
+        <a href="#about">Σχετικά</a>
+        <a href="#gallery">Φωτογραφίες</a>
+        <a href="tarot.html" target="_blank" rel="noopener">Ταρώ</a>
+        <a class="btn" href="#contact">Επικοινωνία</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="moon" aria-hidden="true"></div>
+        <h1>Νύχτα. Αστέρια. Ιστορίες.</h1>
+        <p>Εικόνες & λέξεις με μυστικιστική ανάσα.</p>
+      </div>
+
+      <!-- ΦΩΤΟ με QUOTE ΠΑΝΩ -->
+      <div class="photo-quote" id="about">
+        <!-- Θάλασσα / περπάτημα: άλλαξέ το με δική σου φωτογραφία όταν θες -->
+        <img src="https://images.unsplash.com/photo-1500099817043-86d46000d58f?q=80&w=1600&auto=format&fit=crop" alt="Περπάτημα προς τον ορίζοντα δίπλα στη θάλασσα">
+        <div class="overlay">«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</div>
+      </div>
+    </section>
+
+    <!-- ΦΤΕΡΑ: μισό άγγελος / μισό δαίμονας -->
+    <section class="wings" aria-label="Άγγελος & Δαίμονας">
+      <div class="card">
+        <h3>Angel ✧ Demon</h3>
+        <div class="left" aria-hidden="true"></div>
+        <div class="right" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" aria-label="Φωτογραφίες">
+      <div class="grid">
+        <figure class="card">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" alt="Νυχτερινός ουρανός με αστέρια">
+          <figcaption class="cap">Γαλαξίας</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop" alt="Θάλασσα στο σούρουπο">
+          <figcaption class="cap">Θάλασσα & Σελήνη</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1600&auto=format&fit=crop" alt="Φώτα πόλης τη νύχτα">
+          <figcaption class="cap">Σιωπηλή Πόλη</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="wrap" style="padding:0;margin-top:22px">
+      <div class="card" style="padding:18px">
+        <p>Θες να πεις ένα γεια; Γράψε μου:</p>
+        <p><a href="mailto:hello@yourdomain.tld" style="display:inline-block;padding:10px 16px;border-radius:999px;text-decoration:none;background:linear-gradient(90deg,var(--gold),#f1d08b);color:#0b1418;font-weight:800">hello@yourdomain.tld</a></p>
+        <p style="color:var(--muted)">Άλλαξε τη διεύθυνση email στο HTML.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-in">
+      <span>© <span id="y"></span> Агата Карл</span>
+      <span>Designed with ☾ & ✦</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
