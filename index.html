@@ -1,39 +1,369 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Агата Карл</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Агата Карл — Νύχτα & Αστέρια</title>
+  <meta name="description" content="Προσωπική σελίδα της Агата Карл με φωτογραφίες, κείμενα και μυστικιστική αισθητική." />
+
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Georgia', serif;
-      color: gold;
-      text-align: center;
+    :root{
+      --bg-1:#05060a;        /* βαθύ νυχτερινό */
+      --bg-2:#0b1220;        /* μπλε-μελαγχολικό */
+      --ink:#e8e6df;         /* σχεδόν λευκό */
+      --muted:#b9b6ad;
+      --brand:#d6b26d;       /* χρυσαφί */
+      --brand-2:#7fd1c9;     /* τιρκουάζ πινελιά */
+      --card:#0c101a;
+      --glass:rgba(255,255,255,.06);
+      --shadow:0 10px 30px rgba(0,0,0,.45);
+      --radius:18px;
+      --blur:14px;
     }
 
-    h1 {
-      font-size: 3em;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+    /* Reset/typography */
+    *,*::before,*::after{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      color:var(--ink);
+      font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 70% -10%, #0f1b2e 0%, transparent 60%) fixed,
+                  linear-gradient(180deg, var(--bg-1), var(--bg-2)) fixed;
+      overflow-x:hidden;
     }
 
-    .cat {
-      font-size: 2em;
-      display: block;
-      margin-top: 10px;
+    /* Canvas αστέρια πίσω-πίσω */
+    #stars{
+      position:fixed; inset:0; z-index:-1;
+      display:block; background:transparent;
     }
+
+    /* Header / Nav */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(var(--blur));
+      background: linear-gradient(180deg, rgba(5,6,10,.75), rgba(5,6,10,.35));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      max-width:1100px; margin:0 auto;
+      display:flex; align-items:center; gap:18px;
+      padding:12px 16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color:var(--ink);
+      font-weight:700; letter-spacing:.6px;
+    }
+    .brand img{
+      width:42px; height:42px; object-fit:contain;
+      border-radius:50%; box-shadow: var(--shadow);
+    }
+    .brand span{ 
+      font-size:18px;
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));
+      -webkit-background-clip:text; background-clip:text;
+      color:transparent;
+    }
+    nav{ margin-left:auto; display:flex; gap:10px; flex-wrap:wrap }
+    nav a{
+      color:var(--muted); text-decoration:none; font-weight:600;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+      transition:.25s ease;
+    }
+    nav a:hover{ color:var(--ink); border-color:rgba(255,255,255,.18); transform:translateY(-1px) }
+    nav a.btn{
+      color:#0b1418; background:linear-gradient(90deg,var(--brand),#f1d08b);
+      border:0; box-shadow:0 10px 18px rgba(214,178,109,.18);
+    }
+
+    /* Hero */
+    .hero{
+      max-width:1100px; margin:40px auto 0; padding:32px 16px 12px;
+      display:grid; gap:18px;
+    }
+    .hero-card{
+      position:relative; overflow:hidden;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      min-height: 280px;
+      display:grid; place-items:center;
+      text-align:center;
+    }
+    .moon{
+      position:absolute; top:-60px; right:-80px; width:360px; height:360px;
+      background:radial-gradient(circle at 50% 50%, #f6f0c7 0%, #e3d99f 40%, rgba(230,210,130,.2) 60%, transparent 70%);
+      filter: blur(4px) saturate(110%); opacity:.18; pointer-events:none;
+    }
+    .hero h1{
+      margin:0; font-size: clamp(36px, 6vw, 64px);
+      letter-spacing:.6px; line-height:1.1;
+      text-shadow: 0 6px 24px rgba(0,0,0,.55);
+    }
+    .hero p{
+      margin:6px 0 8px; color:var(--muted); font-size:clamp(16px, 2.4vw, 19px);
+    }
+
+    /* Sections */
+    section{ scroll-margin-top:90px }
+    .wrap{ max-width:1100px; margin:0 auto; padding:22px 16px 28px }
+    .title{
+      font-size: clamp(22px, 3.4vw, 28px); margin:10px 0 16px;
+      letter-spacing:.4px;
+    }
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      grid-column: span 12;
+      background: var(--glass);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .inner{ padding:18px }
+    .card h3{ margin:0 0 6px }
+    .card p{ margin:0; color:var(--muted) }
+
+    /* Gallery cards */
+    .thumb{
+      position:relative; aspect-ratio: 16/9; width:100%; overflow:hidden;
+      background:#0b111a;
+    }
+    .thumb img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:saturate(105%) contrast(102%);
+      transform:scale(1.02); transition:transform .5s ease;
+    }
+    .card:hover .thumb img{ transform:scale(1.06) }
+    .caption{
+      position:absolute; left:12px; bottom:12px; right:12px;
+      padding:10px 12px; border-radius:12px;
+      background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55));
+      color:#fff; font-weight:700; letter-spacing:.3px;
+      border:1px solid rgba(255,255,255,.14)
+    }
+
+    /* 2/3 columns on md+ */
+    @media (min-width:780px){
+      .col-6{ grid-column: span 6 }
+      .col-4{ grid-column: span 4 }
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.35);
+    }
+    .footer-inner{
+      max-width:1100px; margin:0 auto; padding:22px 16px 40px;
+      color:var(--muted); display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
+    }
+    .footer-inner a{ color:var(--brand-2); text-decoration:none }
   </style>
 </head>
 <body>
-  <div>
-    <h1>Агата Карл</h1>
-    <span class="cat">🐈</span>
-  </div>
+
+  <!-- background stars -->
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <!-- sticky header -->
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top" aria-label="Αρχική">
+        <!-- Βάλε το δικό σου αρχείο στο assets/logo-mooncat.png -->
+        <img src="assets/logo-mooncat.png" alt="Logo — γατάκι στη σελήνη" onerror="this.style.display='none'">
+        <span>Агата Карл</span>
+      </a>
+      <nav>
+        <a href="#about">Σχετικά</a>
+        <a href="#gallery">Φωτογραφίες</a>
+        <a href="#writings">Κείμενα</a>
+        <a class="btn" href="#contact">Επικοινωνία</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <main id="top" class="hero">
+    <div class="hero-card">
+      <div class="moon" aria-hidden="true"></div>
+      <div>
+        <h1>Νύχτα. Αστέρια. Ιστορίες.</h1>
+        <p>Μια ατμοσφαιρική γωνιά για εικόνες & λέξεις που αγαπώ.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- About -->
+  <section id="about" class="wrap">
+    <h2 class="title">Σχετικά</h2>
+    <div class="grid">
+      <article class="card col-6">
+        <div class="inner">
+          <h3>Ποια είμαι</h3>
+          <p>Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. Το site αυτό είναι προσωπικό ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.</p>
+        </div>
+      </article>
+      <article class="card col-6">
+        <div class="inner">
+          <h3>Αισθητική</h3>
+          <p>Φεγγαρόφωτο, ήσυχες πόλεις, θάλασσα τα μεσάνυχτα, γάτες με χρυσά μάτια. Παίζω με χρώματα <em>χρυσαφί</em> &amp; <em>τιρκουάζ</em>.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="wrap">
+    <h2 class="title">Φωτογραφίες</h2>
+    <div class="grid">
+      <!-- Κάρτα 1 -->
+      <figure class="card col-6">
+        <div class="thumb">
+          <img src="assets/sample-1.jpg" alt="Νυχτερινός ουρανός με γαλαξία" />
+          <figcaption class="caption">Γαλαξίας</figcaption>
+        </div>
+      </figure>
+
+      <!-- Κάρτα 2 -->
+      <figure class="card col-6">
+        <div class="thumb">
+          <img src="assets/sample-2.jpg" alt="Θάλασσα στο φως της σελήνης" />
+          <figcaption class="caption">Θάλασσα & Σελήνη</figcaption>
+        </div>
+      </figure>
+
+      <!-- Κάρτα 3 -->
+      <figure class="card col-4">
+        <div class="thumb">
+          <img src="assets/sample-3.jpg" alt="Παράθυρο με νυχτερινό φως" />
+          <figcaption class="caption">Παράθυρο</figcaption>
+        </div>
+      </figure>
+
+      <!-- Κάρτα 4 -->
+      <figure class="card col-4">
+        <div class="thumb">
+          <img src="assets/sample-4.jpg" alt="Πόλη τη νύχτα" />
+          <figcaption class="caption">Σιωπηλή Πόλη</figcaption>
+        </div>
+      </figure>
+
+      <!-- Κάρτα 5 -->
+      <figure class="card col-4">
+        <div class="thumb">
+          <img src="assets/sample-5.jpg" alt="Γάτα πάνω σε στέγη" />
+          <figcaption class="caption">Στη Στέγη</figcaption>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Writings -->
+  <section id="writings" class="wrap">
+    <h2 class="title">Κείμενα</h2>
+    <div class="grid">
+      <article class="card col-12">
+        <div class="inner">
+          <h3>Απόσπασμα</h3>
+          <p>«Στο σκοτάδι, τα βήματα γίνονται πιο σιγανά. Κι όμως, η καρδιά μαθαίνει να μιλάει με άστρα.»</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="wrap">
+    <h2 class="title">Επικοινωνία</h2>
+    <div class="grid">
+      <div class="card col-12">
+        <div class="inner">
+          <p>Θες να πεις ένα γεια; Στείλε μου email:</p>
+          <p>
+            <a href="mailto:your.email@example.com" style="display:inline-block;padding:10px 16px;border-radius:999px;text-decoration:none;background:linear-gradient(90deg,var(--brand),#f1d08b);color:#0b1418;font-weight:800">your.email@example.com</a>
+          </p>
+          <p style="color:var(--muted)">Μπορείς να αλλάξεις τη διεύθυνση στο HTML (ενότητα Επικοινωνία).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> Агата Карл</span>
+      <span>Designed with ☾ & ✦</span>
+    </div>
+  </footer>
+
+  <script>
+    // Έτος footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Απλό animation αστεριών σε canvas (ελαφρύ)
+    (function () {
+      const c = document.getElementById('stars');
+      const ctx = c.getContext('2d', { alpha: true });
+      let W, H, stars;
+      const DENSITY = 0.00022;   // λιγότερο = πιο ελαφρύ
+      const SPEED = 0.05;
+
+      function resize(){
+        W = c.width = window.innerWidth;
+        H = c.height = window.innerHeight;
+        const count = Math.max(80, Math.floor(W * H * DENSITY));
+        stars = Array.from({length:count}, () => ({
+          x: Math.random()*W,
+          y: Math.random()*H,
+          r: Math.random()*1.3 + 0.2,
+          v: Math.random()*SPEED + 0.02,
+          a: Math.random()*Math.PI*2
+        }));
+      }
+      function tick(){
+        ctx.clearRect(0,0,W,H);
+        for (const s of stars){
+          s.a += s.v;
+          const twinkle = 0.5 + Math.sin(s.a)*0.5;
+          ctx.globalAlpha = 0.35 + twinkle*0.55;
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('resize', resize, { passive:true });
+      resize(); tick();
+    })();
+
+    // Ομαλό scroll για anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}) }
+      })
+    });
+
+    // Μικρό fade-in όταν μπαίνουν στο viewport
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.style.transition='opacity .7s ease, transform .7s ease';
+          en.target.style.opacity='1'; en.target.style.transform='translateY(0)';
+          observer.unobserve(en.target);
+        }
+      })
+    }, { threshold:.12 });
+    document.querySelectorAll('.card, .hero-card').forEach(el=>{
+      el.style.opacity='.001'; el.style.transform='translateY(12px)'; observer.observe(el);
+    });
+  </script>
 </body>
 </html>
