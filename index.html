@@ -1,322 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="el">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Агата Карл — Νύχτα & Αστέρια</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%25%22 y=%2258%25%22 font-size=%2280%22 text-anchor=%22middle%22>⭐</text></svg>">
+
 <style>
   :root{
-    --bg:#0c0c0f; --gold:#e7c86a; --gold-soft:#f3dea0; --ink:#d8cfb3; --panel:#121218; --ring:rgba(231,200,106,.25);
+    --bg:#0b0b0f; --card:#121219; --soft:#1a1a22;
+    --gold:#e6c267; --gold-soft:#c9a959; --text:#e8e6de;
+    --muted:#b9b6aa; --glow:0 0 30px rgba(230,194,103,.25);
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;background:radial-gradient(ellipse at 50% -20%,#111425 0%, #0b0d14 45%, #090a0f 100%);color:var(--ink);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto;line-height:1.6}
-  h1,h2,h3{font-family:"Cormorant Garamond",serif;color:var(--gold);margin:0 0 .6rem}
-  h1{font-size:clamp(34px,5vw,56px);letter-spacing:.03em;text-align:center;margin-top:28px}
-  .nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:18px auto 26px}
-  .chip{padding:10px 18px;border:1px solid var(--gold);border-radius:18px;color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.2));backdrop-filter:blur(2px);cursor:pointer;transition:.25s}
-  .chip:hover{box-shadow:0 0 0 6px var(--ring)}
-  section{max-width:1000px;margin:0 auto;padding:24px 18px}
-  .card{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:18px 16px;box-shadow:0 40px 120px rgba(0,0,0,.35), 0 0 80px rgba(231,200,106,.06) inset}
-  .section-title{font-size:clamp(26px,4.2vw,40px);text-align:center;margin:6px 0 18px}
-  .muted{color:#bfb9a4}
-  .grid{display:grid;gap:18px}
-  .grid.photos{grid-template-columns:1fr;max-width:980px;margin-inline:auto}
-  @media(min-width:760px){ .grid.photos{grid-template-columns:1fr 1fr} }
-  .photo{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.3)}
-  .photo img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;transition:transform .35s ease}
-  .photo:hover img{transform:scale(1.03)}
-  .photo .caption{position:absolute;left:12px;bottom:10px;background:rgba(0,0,0,.42);padding:6px 10px;border-radius:12px;color:#eee;font-size:14px;border:1px solid rgba(255,255,255,.08)}
-  /* Lightbox */
-  .lightbox-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:60}
-  .lightbox-backdrop.open{display:flex}
-  .lightbox-frame{max-width:92vw;max-height:86vh;border-radius:16px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.12)}
-  .lightbox-frame img{display:block;max-width:100%;max-height:86vh}
-  .lightbox-x{position:absolute;top:14px;right:14px;background:#0009;border:1px solid #fff3;color:#fff;padding:8px 12px;border-radius:12px;cursor:pointer}
-  /* Moon / Quote */
-  .widgets{display:grid;gap:18px;grid-template-columns:1fr;max-width:980px;margin-inline:auto}
-  @media(min-width:760px){ .widgets{grid-template-columns:1fr 1fr} }
-  .widget-title{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--gold-soft);margin-bottom:8px}
-  .quote{font-style:italic}
-  /* Tarot */
-  .tarot-wrap .controls{display:flex;flex-wrap:wrap;gap:8px}
-  .tarot-wrap input,.tarot-wrap button, .tarot-wrap select{
-    padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0e1016;color:#eee
+  html,body{margin:0;background:radial-gradient(1200px 700px at 50% -200px,#141522,#0b0b0f) fixed; color:var(--text); font-family: ui-serif, Georgia, "Times New Roman", serif}
+  /* night-stars */
+  body:before{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background:
+      radial-gradient(2px 2px at 10% 20%, #fff8 50%, transparent 51%) repeat,
+      radial-gradient(1px 1px at 70% 80%, #fff6 50%, transparent 51%) repeat,
+      radial-gradient(1px 1px at 30% 60%, #fff5 50%, transparent 51%) repeat;
+    background-size: 220px 220px, 260px 260px, 300px 300px;
+    opacity:.55; z-index:0;
   }
-  .tarot-wrap button{cursor:pointer;border-color:var(--gold);color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.35))}
-  .tarot-result{margin-top:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
-  /* Floating Music */
-  .music-fab{position:fixed;right:16px;bottom:18px;z-index:40;background:linear-gradient(135deg,#f6d47e,#ecb35c);color:#2a210a;border:none;border-radius:18px;padding:12px 16px;display:flex;gap:8px;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.4);font-weight:600}
-  .music-panel{position:fixed;inset:auto 12px 84px 12px;z-index:50;background:#0b0c12; border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;display:none}
-  .music-panel.open{display:block}
-  .music-panel h3{margin:0 0 10px}
-  .song-btn{width:100%;text-align:left;background:#12141c;border:1px solid rgba(255,255,255,.08);padding:10px 12px;border-radius:12px;color:#e8e2cc;margin-bottom:8px}
-  /* Stars bg */
-  .stars{position:fixed;inset:0;pointer-events:none;z-index:-1;background:transparent}
-  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.6;animation:twinkle 3.2s infinite ease-in-out}
-  @keyframes twinkle{0%,100%{opacity:.2}50%{opacity:.9}}
-  /* Footer email */
-  .email{color:var(--gold-soft);text-align:center;margin:24px 0}
+
+  header{position:relative; z-index:2; text-align:center; padding:48px 16px 8px}
+  h1{margin:0; font-weight:700; letter-spacing:.06em; color:var(--gold); text-shadow:0 2px 20px #0008; font-size:clamp(32px,6.5vw,64px)}
+  nav{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; padding:18px 12px 8px}
+  .chip{
+    background:linear-gradient(180deg,var(--soft),#101018);
+    border:1px solid #2a2830; color:var(--text);
+    padding:12px 18px; border-radius:16px; cursor:pointer;
+    box-shadow:var(--glow); transition:.25s ease; text-decoration:none; display:inline-block
+  }
+  .chip:hover{transform:translateY(-1px); box-shadow:0 0 24px rgba(230,194,103,.35); color:var(--gold)}
+
+  main{position:relative; z-index:1; padding:24px 14px 80px; max-width:980px; margin:0 auto}
+  section{margin:24px auto; padding:22px 18px; background:var(--card); border:1px solid #23222a; border-radius:18px; box-shadow:0 0 50px #0006}
+  section h2{margin:0 0 12px; font-size:clamp(22px,4.5vw,34px); color:var(--gold)}
+  p{line-height:1.65; color:var(--muted); margin:0}
+
+  /* Photos */
+  .photos{display:grid; gap:18px}
+  @media(min-width:720px){ .photos{grid-template-columns:repeat(3,1fr)} }
+  .photo{margin:0; background:var(--soft); border:1px solid #272733; border-radius:18px; overflow:hidden; box-shadow:0 10px 40px #0007}
+  .photo a{display:block; overflow:hidden}
+  .photo img{width:100%; height:260px; object-fit:cover; display:block; transition:transform .45s ease}
+  .photo a:hover img{transform:scale(1.05)}
+  .caption{padding:12px 14px; color:var(--muted); text-align:center}
+
+  /* Night corner */
+  .panel{background:#101017; border:1px solid #232230; border-radius:16px; padding:16px; margin-top:10px}
+
+  /* Music Floating Button */
+  .music-fab{
+    position:fixed; right:16px; bottom:16px; z-index:9999;
+    background:linear-gradient(135deg,#f6d483,#d7a94f);
+    color:#2b230f; font-weight:700; border:none; cursor:pointer;
+    border-radius:18px; padding:12px 18px; box-shadow:0 12px 36px #0008; display:flex; gap:8px; align-items:center;
+  }
+  .music-fab small{opacity:.9}
+  .toast{
+    position:fixed; left:12px; bottom:12px; z-index:9998;
+    background:#0e0e14; color:var(--muted); border:1px solid #2b2a34;
+    border-radius:14px; padding:10px 14px; box-shadow:0 10px 30px #000a; display:none
+  }
+
+  /* Email link */
+  a.link{color:#9ec9ff; text-decoration:underline; text-underline-offset:3px}
 </style>
 </head>
 <body>
 
-<!-- tiny starfield -->
-<div class="stars" id="stars"></div>
+<header>
+  <h1>Агата Карл</h1>
+  <nav>
+    <a class="chip" href="#about">Σχετικά</a>
+    <a class="chip" href="#photos">Φωτογραφίες</a>
+    <a class="chip" href="#quote">Moon & Quote</a>
+    <a class="chip" href="#contact">Επικοινωνία</a>
+  </nav>
+</header>
 
-<h1>Агата Карл</h1>
-<nav class="nav">
-  <a class="chip" href="#about">Σχετικά</a>
-  <a class="chip" href="#photos">Φωτογραφίες</a>
-  <a class="chip" href="#tarot">Ταρώ</a>
-  <a class="chip" href="#sky">Moon & Quote</a>
-  <a class="chip" href="#contact">Επικοινωνία</a>
-</nav>
+<main>
+  <!-- Σχετικά -->
+  <section id="about">
+    <h2>Σχετικά</h2>
+    <p>Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.</p>
+  </section>
 
-<section id="about" class="card">
-  <h2 class="section-title">Σχετικά</h2>
-  <p class="muted">Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.</p>
-</section>
+  <!-- Φωτογραφίες -->
+  <section id="photos">
+    <h2>Φωτογραφίες</h2>
 
-<section id="photos">
-  <h2 class="section-title">Φωτογραφίες</h2>
-  <div class="grid photos">
-    <!-- Φτερό Άγγελος & Δαίμονας -->
-    <figure class="photo">
-      <a href="img/angel-demon.png" data-lightbox><img src="img/angel-demon.png" alt="Άγγελος και Δαίμονας"></a>
-      <figcaption class="caption">Άγγελος και Δαίμονας</figcaption>
-    </figure>
-    <!-- Θάλασσα -->
-    <figure class="photo">
-      <a href="img/sea.jpg" data-lightbox><img src="img/sea.jpg" alt="Στη Θάλασσα"></a>
-      <figcaption class="caption">Στη Θάλασσα</figcaption>
-    </figure>
-    <!-- Λογότυπο Γάτα & Φεγγάρι -->
-    <figure class="photo">
-      <a href="img/cat-moon.png" data-lightbox><img src="img/cat-moon.png" alt="Λογότυπο — Γάτα & Φεγγάρι"></a>
-      <figcaption class="caption">Λογότυπο — Γάτα & Φεγγάρι</figcaption>
-    </figure>
-  </div>
-</section>
+    <div class="photos">
+      <!-- Άγγελος & Δαίμονας -->
+      <figure class="photo">
+        <a href="img/img/file_00000000052c61f486149775d65a9ddc.png" target="_blank" rel="noreferrer">
+          <img src="img/img/file_00000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
+        </a>
+        <figcaption class="caption">Άγγελος και Δαίμονας</figcaption>
+      </figure>
 
-<section id="tarot">
-  <h2 class="section-title">Ταρώ</h2>
-  <div class="card tarot-wrap">
-    <div class="controls">
-      <input id="nameInput" type="text" placeholder="Όνομα (προαιρετικό)">
-      <input id="dateInput" type="date" />
-      <select id="spread">
-        <option value="1">1 κάρτα</option>
-        <option value="3">3 κάρτες (Παρελθόν–Παρόν–Μέλλον)</option>
-      </select>
-      <button id="drawBtn">Τράβηξε Κάρτα(ες)</button>
-      <button id="resetTarot">Καθαρισμός</button>
+      <!-- Στη Θάλασσα -->
+      <figure class="photo">
+        <a href="img/img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" target="_blank" rel="noreferrer">
+          <img src="img/img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" alt="Στη Θάλασσα">
+        </a>
+        <figcaption class="caption">Στη Θάλασσα</figcaption>
+      </figure>
+
+      <!-- Λογότυπο Γάτα & Φεγγάρι -->
+      <figure class="photo">
+        <a href="img/img/file_00000000eeac61f59f174b574cf32a2d.png" target="_blank" rel="noreferrer">
+          <img src="img/img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Λογότυπο — Γάτα & Φεγγάρι">
+        </a>
+        <figcaption class="caption">Λογότυπο — Γάτα & Φεγγάρι</figcaption>
+      </figure>
     </div>
-    <div id="tarotResult" class="tarot-result"></div>
-  </div>
-</section>
+  </section>
 
-<section id="sky">
-  <h2 class="section-title">Night Corner</h2>
-  <div class="widgets">
-    <div class="card">
-      <div class="widget-title">Quote of the Day</div>
-      <div id="quoteBox" class="quote"></div>
+  <!-- Night Corner -->
+  <section id="quote">
+    <h2>Night Corner</h2>
+    <div class="panel">
+      <strong>Quote of the Day</strong>
+      <p>«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</p>
     </div>
-    <div class="card">
-      <div class="widget-title">Φάση Σελήνης (σήμερα)</div>
-      <div id="moonBox">
-        <canvas id="moonCanvas" width="160" height="160" style="display:block;margin:auto"></canvas>
-        <div id="moonText" style="text-align:center;margin-top:8px" class="muted"></div>
-      </div>
+    <div class="panel" id="moon">
+      <strong>Φάση Σελήνης (σήμερα)</strong>
+      <p id="moonText" style="margin-top:8px;color:var(--muted)"></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact">
-  <h2 class="section-title">Επικοινωνία</h2>
-  <p class="email">Email: <a href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
-</section>
+  <!-- Επικοινωνία -->
+  <section id="contact">
+    <h2>Επικοινωνία</h2>
+    <p>Email: <a class="link" href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
+  </section>
+</main>
 
-<!-- Floating Music -->
-<button class="music-fab" id="musicFab">♪ Μουσική — Night Mood</button>
-<div class="music-panel card" id="musicPanel" aria-hidden="true">
-  <h3>Μουσική — Night Mood <button id="closeMusic" class="chip" style="float:right;padding:6px 10px">× Κλείσιμο</button></h3>
-  <button class="song-btn" data-yt="UCo2kJ2C5sR0">Evanescence — Bring Me to Life</button>
-  <button class="song-btn" data-yt="FJfFZqTlWrQ">Pink — So What</button>
-  <button class="song-btn" data-yt="xFYQQPAOz7Y">Eminem — Lose Yourself</button>
-  <div id="ytHolder" style="margin-top:8px"></div>
-</div>
+<!-- Πλωτό κουμπί Μουσικής -->
+<button id="musicBtn" class="music-fab" aria-label="Play music">
+  <span>♪ Μουσική</span><small>— Night Mood</small>
+</button>
+<div id="musicToast" class="toast"></div>
 
-<!-- Lightbox backrop -->
-<div class="lightbox-backdrop" id="lightbox">
-  <button class="lightbox-x" id="lbClose">Κλείσιμο</button>
-  <div class="lightbox-frame"><img id="lbImg" alt=""></div>
-</div>
-
+<!-- YouTube IFrame API -->
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-/* ---------- Stars ---------- */
-(function(){
-  const c = document.getElementById('stars');
-  for(let i=0;i<120;i++){
-    const s = document.createElement('div');
-    s.className='star';
-    s.style.top = (Math.random()*100)+'%';
-    s.style.left = (Math.random()*100)+'%';
-    s.style.opacity = .2 + Math.random()*0.8;
-    s.style.animationDelay = (Math.random()*3)+'s';
-    c.appendChild(s);
-  }
-})();
+  /* ---------- Moon phase (προσέγγιση) ---------- */
+  (function(){
+    const d=new Date();
+    const synodic=29.53058867;
+    const knownNew=new Date('2000-01-06T18:14:00Z').getTime()/86400000;
+    const now=d.getTime()/86400000;
+    const days=(now-knownNew)%synodic;
+    const pct=(days/synodic)*100;
+    let name="Νέα Σελήνη";
+    if(pct>1 && pct<=24) name="Αύξ. Ημισέληνος";
+    else if(pct<=49) name="Πρώτο Τέταρτο";
+    else if(pct<=74) name="Αύξ. Αμφίκυρτη";
+    else if(pct<=99) name="Πανσέληνος";
+    else if(pct<=124) name="Φθίν. Αμφίκυρτη";
+    else if(pct<=149) name="Τελευταίο Τέταρτο";
+    else if(pct<=174) name="Φθίν. Ημισέληνος";
+    document.getElementById('moonText').textContent = name;
+  })();
 
-/* ---------- Lightbox ---------- */
-(function(){
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lbImg');
-  document.querySelectorAll('a[data-lightbox]').forEach(a=>{
-    a.addEventListener('click',e=>{
-      e.preventDefault();
-      lbImg.src = a.getAttribute('href');
-      lb.classList.add('open');
+  /* ---------- Music player (autoplay on click, συνεχόμενα) ---------- */
+  const playlist = [
+    { id: "3YxaaGgTQYM", title: "Evanescence — Bring Me to Life" },
+    { id: "FJfFZqTlWrQ", title: "Pink — So What" },
+    { id: "xFYQQPAOz7Y", title: "Eminem — Lose Yourself" }
+  ];
+  let player, current = 0, started = false;
+
+  // Δημιουργούμε κρυφό container για τον iframe
+  const ph = document.createElement('div');
+  ph.id = 'yt-holder';
+  ph.style.position='fixed'; ph.style.left='-9999px'; ph.style.bottom='-9999px';
+  document.body.appendChild(ph);
+
+  function onYouTubeIframeAPIReady(){
+    player = new YT.Player('yt-holder', {
+      height:'0', width:'0',
+      videoId: playlist[0].id,
+      playerVars:{ autoplay:0, controls:0, mute:0, playsinline:1 },
+      events:{
+        'onReady': ()=>{/* nothing */},
+        'onStateChange': onState
+      }
     });
-  });
-  document.getElementById('lbClose').onclick = ()=>lb.classList.remove('open');
-  lb.addEventListener('click',e=>{ if(e.target===lb) lb.classList.remove('open'); });
-})();
-
-/* ---------- Quote of the Day ---------- */
-(function(){
-  const quotes = [
-    "Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.",
-    "Η σιωπή της νύχτας ξέρει μυστικά που η μέρα ξεχνά.",
-    "Κάθε αστέρι είναι μια υπόσχεση στο σκοτάδι.",
-    "Όπου πέφτει το φως, ο ίσκιος αποκτά μορφή.",
-    "Τα όνειρα είναι οι χάρτες των θαρραλέων."
-  ];
-  const i = new Date().getDate()%quotes.length;
-  document.getElementById('quoteBox').textContent = "«"+quotes[i]+"»";
-})();
-
-/* ---------- Moon phase (approx.) ---------- */
-(function(){
-  function moonPhase(d){
-    // Simple Conway-like approximation
-    const year=d.getUTCFullYear(), month=d.getUTCMonth()+1, day=d.getUTCDate();
-    let r = year % 100; r %= 19; if(r>9) r-=19;
-    r = ((r*11) % 30) + month + day;
-    if(month<3) r+=2;
-    const phase = (r<0? r+30 : r) % 30; // 0=new, 15=full
-    return phase/29.53; // 0..1
   }
-  const p = moonPhase(new Date()); // fraction
-  const names = ["Νέα Σελήνη","Κηλ. Αύξουσα","Πρώτο Τέταρτο","Αύξουσα","Πανσέληνος","Φθίνουσα","Τελευταίο Τέταρτο","Κηλ. Φθίνουσα"];
-  function nameFrom(f){
-    if(f<0.06) return names[0];
-    if(f<0.23) return names[1];
-    if(f<0.31) return names[2];
-    if(f<0.48) return names[3];
-    if(f<0.56) return names[4];
-    if(f<0.73) return names[5];
-    if(f<0.81) return names[6];
-    return names[7];
-  }
-  const cv=document.getElementById('moonCanvas'), ctx=cv.getContext('2d');
-  const R=70, cx=cv.width/2, cy=cv.height/2;
-  // background
-  ctx.fillStyle="#0a0b10"; ctx.fillRect(0,0,cv.width,cv.height);
-  // full disc
-  ctx.fillStyle="#f4f1e6"; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
-  // shadow
-  const k = Math.cos(p*Math.PI*2);
-  ctx.fillStyle="#0a0b10";
-  ctx.beginPath();
-  ctx.ellipse(cx + k*R, cy, Math.abs(k)*R, R, 0, 0, Math.PI*2);
-  ctx.fill();
-  document.getElementById('moonText').textContent = nameFrom(p);
-})();
+  window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-/* ---------- Tarot ---------- */
-(function(){
-  const majors = [
-    ["Ο Τρελός","Ξεκίνημα, ελευθερία, ρίσκο"],
-    ["Ο Μάγος","Δύναμη βούλησης, δημιουργία"],
-    ["Η Ιέρεια","Διαίσθηση, μυστικά"],
-    ["Η Αυτοκράτειρα","Φροντίδα, αφθονία"],
-    ["Ο Αυτοκράτορας","Δομή, σταθερότητα"],
-    ["Ο Ιεροφάντης","Παράδοση, σοφία"],
-    ["Οι Εραστές","Επιλογή, ένωση"],
-    ["Το Άρμα","Πρόοδος, θέληση"],
-    ["Δύναμη","Κουράγιο, ήρεμη ισχύς"],
-    ["Ερημίτης","Εσωτερική αναζήτηση"],
-    ["Τύχη","Αλλαγή, κύκλοι"],
-    ["Δικαιοσύνη","Ισορροπία, αλήθεια"],
-    ["Κρεμασμένος","Παράδοση, νέα οπτική"],
-    ["Θάνατος","Μεταμόρφωση, κλείσιμο"],
-    ["Εγκράτεια","Μέτρο, αλχημεία"],
-    ["Διάβολος","Δεσμοί, πειρασμός"],
-    ["Πύργος","Ανατροπή, απελευθέρωση"],
-    ["Αστέρι","Ελπίδα, ίαση"],
-    ["Σελήνη","Σκιές, υποσυνείδητο"],
-    ["Ήλιος","Ζωτικότητα, χαρά"],
-    ["Κρίση","Ξύπνημα, κάλεσμα"],
-    ["Κόσμος","Ολοκλήρωση, ενόραση"]
-  ];
-  const dateInput = document.getElementById('dateInput');
-  const nameInput = document.getElementById('nameInput');
-  const spreadSel = document.getElementById('spread');
-  const out = document.getElementById('tarotResult');
-  function seededRand(seed){ let x = Math.sin(seed)*10000; return x - Math.floor(x); }
-  function draw(n){
-    const d = dateInput.value ? new Date(dateInput.value) : new Date();
-    let seed = d.getFullYear()*10000 + (d.getMonth()+1)*100 + d.getDate();
-    if(nameInput.value){ for(const ch of nameInput.value) seed += ch.charCodeAt(0); }
-    const res=[];
-    for(let i=0;i<n;i++){
-      const r = seededRand(seed+i);
-      const idx = Math.floor(r*majors.length);
-      const rev = seededRand(seed*7+i)>.75; // ~25% reversed
-      const card = majors[idx][0] + (rev?" (ανεστραμμένο)":"");
-      const meaning = majors[idx][1] + (rev?" — μπλοκάρισμα/καθυστέρηση":"");
-      res.push(`<div><b>${card}</b><br><span class="muted">${meaning}</span></div>`);
+  function onState(e){
+    // 0: ended
+    if(e.data === YT.PlayerState.ENDED){
+      current = (current + 1) % playlist.length;
+      player.loadVideoById(playlist[current].id);
+      toast('Τώρα παίζει: ' + playlist[current].title);
     }
-    out.innerHTML = res.join('<hr style="border:0;border-top:1px solid rgba(255,255,255,.08);margin:8px 0">');
   }
-  document.getElementById('drawBtn').onclick=()=>draw(+spreadSel.value);
-  document.getElementById('resetTarot').onclick=()=>{ out.innerHTML=''; nameInput.value=''; dateInput.value=''; };
-})();
 
-/* ---------- Music (floating + background play with YT embed muted UI) ---------- */
-(function(){
-  const fab = document.getElementById('musicFab');
-  const panel = document.getElementById('musicPanel');
-  const holder = document.getElementById('ytHolder');
-  const closeBtn = document.getElementById('closeMusic');
-  const list = Array.from(document.querySelectorAll('.song-btn')).map(b=>({el:b,id:b.dataset.yt}));
-  let current = 0, playerFrame=null;
-
-  function load(id, autoplay){
-    holder.innerHTML = `<iframe width="100%" height="240" src="https://www.youtube.com/embed/${id}?enablejsapi=1&autoplay=${autoplay?1:0}" 
-      title="YouTube" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    playerFrame = holder.querySelector('iframe');
+  function toast(msg){
+    const t = document.getElementById('musicToast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    clearTimeout(window.__toast);
+    window.__toast = setTimeout(()=> t.style.display='none', 2600);
   }
-  // αρχικό χωρίς να ανοίξεις panel
-  load(list[0].id, true);
 
-  // εναλλαγή από panel
-  list.forEach((s, idx)=> s.el.onclick=()=>{ current=idx; load(s.id,true); });
-
-  fab.onclick = ()=> panel.classList.toggle('open');
-  closeBtn.onclick = ()=> panel.classList.remove('open');
-
-  // αυτόματη μετάβαση στο επόμενο (απλή προσέγγιση timer ~ διάρκεια)
-  const durations = [235, 215, 326]; // sec περίπου
-  setInterval(()=>{
-    // αν υπάρχει iframe, συνεχίζουμε σαν “ραδιόφωνο” με κύκλο
-    current = (current+1) % list.length;
-    load(list[current].id,true);
-  }, 1000*durations[0]); // απλά ~κάθε 3-4 λεπτά – μπορείς να προσαρμόσεις
-})();
+  document.getElementById('musicBtn').addEventListener('click', () => {
+    if(!player){ toast('Φόρτωση…'); return; }
+    if(!started){
+      started=true;
+      current=0;
+      player.loadVideoById(playlist[current].id);
+      toast('Ξεκίνησε: ' + playlist[current].title);
+    }else{
+      // toggle pause/resume
+      const s = player.getPlayerState();
+      if(s===YT.PlayerState.PLAYING){ player.pauseVideo(); toast('Παύση μουσικής'); }
+      else { player.playVideo(); toast('Συνέχεια μουσικής'); }
+    }
+  });
 </script>
 </body>
 </html>
+        
