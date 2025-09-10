@@ -1,173 +1,196 @@
-<!doctype html>
+ <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Агата Карл — Νύχτα & Αστέρια</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0b0e12; --fg:#e8d18b; --fg-soft:#d7c37b; --fg-dim:#cbb670;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:#0b0e12;color:#eee;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto}
-  .wrap{max-width:940px;margin:0 auto;padding:28px 18px 120px}
-  .title{text-align:center;color:var(--fg);font-family:"Cormorant Garamond",serif;font-size:44px;margin:28px 0}
-  .nav{display:flex;justify-content:center;gap:14px;margin-bottom:28px;flex-wrap:wrap}
-  .chip{padding:10px 18px;border:1px solid var(--fg-soft);border-radius:18px;background:rgba(255,255,255,.05);color:var(--fg);cursor:pointer}
-  h2.section{text-align:center;color:var(--fg-dim);font-family:"Cormorant Garamond",serif;font-size:32px;margin:34px 0 14px}
-  .lead{text-align:center;max-width:700px;margin:0 auto 20px;line-height:1.6;color:#e7e1cc}
-  .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px;margin:18px 0}
-  .card h3{margin:6px 0 12px;color:var(--fg);font-family:"Cormorant Garamond",serif}
-  .imgframe{overflow:hidden;border-radius:8px}
-  .imgframe img{width:100%;height:auto;display:block}
-
-  /* Floating music player */
-  .player{position:fixed;right:16px;bottom:16px;z-index:1000;
-    background:rgba(16,18,22,.92);border:1px solid rgba(255,255,255,.15);
-    border-radius:14px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.6);
-    width:min(360px,92vw)}
-  .player header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-  .player .ttl{color:#f4e2a2;font-size:14px;line-height:1.2}
-  .minbtn{background:none;border:0;color:#f4e2a2;font-size:18px;cursor:pointer}
-  #yt-container{width:100%;height:200px;border-radius:8px;overflow:hidden}
-  .tracklist{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-  .tracklist button{flex:1 1 100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.18);
-    background:#111;color:#f1e1a4;cursor:pointer}
-  .tracklist button.active{outline:2px solid #e8d18b;}
-
-  a{color:var(--fg)}
-  .quote{text-align:center;font-style:italic;margin-top:8px;color:#f0ead0}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Агата Карл — Νύχτα & Αστέρια</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: black url('https://www.transparenttextures.com/patterns/stardust.png');
+      color: #f5f5f5;
+      text-align: center;
+    }
+    header {
+      padding: 20px;
+      font-size: 2em;
+      color: gold;
+    }
+    nav {
+      margin: 10px 0 30px;
+    }
+    nav button {
+      background: transparent;
+      border: 1px solid gold;
+      color: gold;
+      padding: 10px 18px;
+      margin: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    nav button:hover {
+      background: gold;
+      color: black;
+    }
+    section {
+      padding: 20px;
+    }
+    h2 {
+      color: gold;
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 90%;
+      height: auto;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,215,0,0.4);
+    }
+    .quote {
+      font-style: italic;
+      margin-top: 10px;
+    }
+    /* Music player container */
+    #musicPlayer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.9);
+      border-top: 1px solid gold;
+      padding: 8px;
+      z-index: 1000;
+      font-size: 0.9em;
+      color: gold;
+    }
+    #musicPlayer iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+    #tracklist button {
+      display: block;
+      width: 90%;
+      margin: 5px auto;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid gold;
+      background: transparent;
+      color: gold;
+      cursor: pointer;
+    }
+    #tracklist button.active {
+      background: gold;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-
-<div class="wrap">
-
-  <h1 class="title">Агата Карл</h1>
-
-  <nav class="nav">
-    <button class="chip" onclick="scrollToId('about')">Σχετικά</button>
-    <button class="chip" onclick="scrollToId('photos')">Φωτογραφίες</button>
-    <button class="chip" onclick="scrollToId('contact')">Επικοινωνία</button>
+  <header>Агата Карл</header>
+  <nav>
+    <button onclick="scrollToId('about')">Σχετικά</button>
+    <button onclick="scrollToId('photos')">Φωτογραφίες</button>
+    <button onclick="scrollToId('contact')">Επικοινωνία</button>
   </nav>
 
   <section id="about">
-    <h2 class="section">Σχετικά</h2>
-    <p class="lead">
-      Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. Αυτό το site είναι το
-      προσωπικό μου ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.
-    </p>
+    <h2>Σχετικά</h2>
+    <p>Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. 
+    Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και 
+    κειμένων με μυστικιστική αισθητική.</p>
   </section>
 
   <section id="photos">
-    <h2 class="section">Φωτογραφίες</h2>
-
-    <div class="card">
+    <h2>Φωτογραφίες</h2>
+    <div>
       <h3>Άγγελος και Δαίμονας</h3>
-      <div class="imgframe">
-        <img src="img/img/file_00000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
-      </div>
+      <img src="img/file_0000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
     </div>
-
-    <div class="card">
+    <div>
       <h3>Στη Θάλασσα</h3>
-      <div class="imgframe">
-        <img src="img/img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" alt="Στη Θάλασσα">
-      </div>
+      <img src="img/Screenshot_2025-09-08-19-29-42-086_com.instagram.android.jpg" alt="Στη Θάλασσα">
       <p class="quote">«Ο δρόμος ανοίγεται εκεί που η ψυχή τολμά να περπατήσει.»</p>
     </div>
-
-    <div class="card">
+    <div>
       <h3>Λογότυπο — Γάτα & Φεγγάρι</h3>
-      <div class="imgframe">
-        <img src="img/img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Γάτα με φεγγάρι">
-      </div>
+      <img src="img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Λογότυπο με γάτα και φεγγάρι">
     </div>
-
   </section>
 
   <section id="contact">
-    <h2 class="section">Επικοινωνία</h2>
-    <p class="lead">Email: <a href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
+    <h2>Επικοινωνία</h2>
+    <p>Email: <a href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
   </section>
 
-</div>
+  <!-- MUSIC PLAYER -->
+  <div id="musicPlayer">
+    <div id="nowTitle">Τώρα παίζει: —</div>
+    <div id="yt-container"></div>
+    <div id="tracklist"></div>
+  </div>
 
-<!-- Floating music player (persistent) -->
-<div class="player" id="playerBox">
-  <header>
-    <div class="ttl" id="nowTitle">Τώρα παίζει: Evanescence — Bring Me to Life</div>
-    <button class="minbtn" title="Κλείσιμο" onclick="document.getElementById('playerBox').style.display='none'">×</button>
-  </header>
-  <div id="yt-container"></div>
-  <div class="tracklist" id="tracklist"></div>
-</div>
+  <!-- ========= MUSIC SCRIPT ========= -->
+  <script>
+    const playlist = [
+      {id:'3YxaaGgTQYM', title:'Evanescence — Bring Me to Life'},
+      {id:'FJfFZqTlWrQ', title:'Pink — So What'},
+      {id:'xFYQQPAOz7Y', title:'Eminem — Lose Yourself'}
+    ];
+    let currentIndex = 0;
+    let player;
 
-<script>
-function scrollToId(id){
-  const el = document.getElementById(id);
-  if(el){ el.scrollIntoView({behavior:'smooth'}); }
-}
-
-/* -------- YouTube playlist με auto-next -------- */
-const playlist = [
-  {id:'3YxaaGgTQYM', title:'Evanescence — Bring Me to Life'}, // official
-  {id:'FJfFZqTlWrQ', title:'Pink — So What'},
-  {id:'xFYQQPAOz7Y', title:'Eminem — Lose Yourself'} // αν αλλάξει ID, πες μου
-];
-let currentIndex = 0;
-let player;
-
-function buildTrackButtons(){
-  const holder = document.getElementById('tracklist');
-  holder.innerHTML = '';
-  playlist.forEach((t, i) => {
-    const b = document.createElement('button');
-    b.textContent = t.title;
-    b.onclick = () => loadIndex(i, true);
-    b.id = 'track-'+i;
-    holder.appendChild(b);
-  });
-  highlightActive();
-}
-function highlightActive(){
-  playlist.forEach((_,i)=>{
-    const b = document.getElementById('track-'+i);
-    if(!b) return;
-    b.classList.toggle('active', i===currentIndex);
-  });
-}
-function loadIndex(i, user){
-  currentIndex = i % playlist.length;
-  document.getElementById('nowTitle').textContent = 'Τώρα παίζει: ' + playlist[currentIndex].title;
-  if(player){
-    player.loadVideoById(playlist[currentIndex].id);
-    if(user){ player.unMute(); } // αν ο χρήστης πάτησε επιλογή, βγάζουμε mute
-  }
-  highlightActive();
-}
-
-function onYouTubeIframeAPIReady(){
-  player = new YT.Player('yt-container',{
-    videoId: playlist[currentIndex].id,
-    playerVars:{
-      autoplay:1, mute:1, rel:0, modestbranding:1, playsinline:1
-    },
-    events:{
-      'onReady': (e)=>{ e.target.playVideo(); buildTrackButtons(); },
-      'onStateChange': (e)=>{
-        // 0 = ended
-        if(e.data === 0){
-          currentIndex = (currentIndex+1) % playlist.length;
-          loadIndex(currentIndex, false);
-        }
-      }
+    function buildTrackButtons(){
+      const holder = document.getElementById('tracklist');
+      holder.innerHTML = '';
+      playlist.forEach((t, i) => {
+        const b = document.createElement('button');
+        b.textContent = t.title;
+        b.onclick = () => loadIndex(i, true);
+        b.id = 'track-'+i;
+        holder.appendChild(b);
+      });
+      highlightActive();
     }
-  });
-}
-</script>
-<script src="https://www.youtube.com/iframe_api"></script>
+    function highlightActive(){
+      playlist.forEach((_,i)=>{
+        const b = document.getElementById('track-'+i);
+        if(b) b.classList.toggle('active', i===currentIndex);
+      });
+    }
+    function loadIndex(i, userTriggered){
+      currentIndex = (i + playlist.length) % playlist.length;
+      document.getElementById('nowTitle').textContent = 'Τώρα παίζει: ' + playlist[currentIndex].title;
+      if(player){
+        player.loadVideoById(playlist[currentIndex].id);
+        if(userTriggered) player.unMute();
+      }
+      highlightActive();
+    }
 
+    window.onYouTubeIframeAPIReady = function(){
+      player = new YT.Player('yt-container',{
+        videoId: playlist[currentIndex].id,
+        playerVars:{
+          autoplay:1, mute:1, playsinline:1,
+          rel:0, modestbranding:1, origin:location.origin
+        },
+        events:{
+          onReady: (e)=>{ e.target.playVideo(); buildTrackButtons(); },
+          onStateChange: (e)=>{
+            if(e.data === 0){ loadIndex(currentIndex+1, false); }
+          }
+        }
+      });
+    };
+
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
-</html>
+</html>         
