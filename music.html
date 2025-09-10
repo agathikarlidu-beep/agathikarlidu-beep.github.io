@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Μουσική — Αγατα Καρλ</title>
+  <style>
+    body{ margin:0; background:#000; color:#e6c34d; font-family:Georgia,serif; text-align:center }
+    .stars{ position:fixed; inset:0; z-index:-1; background:#000 url("https://www.transparenttextures.com/patterns/stardust.png"); animation:stars 60s linear infinite; }
+    @keyframes stars{ from{background-position:0 0} to{background-position:-10000px 5000px} }
+    header{ padding:20px; font-size:1.8em; font-weight:bold; text-shadow:0 0 12px rgba(230,195,77,.45) }
+    .wrap{ max-width:1100px; margin:0 auto; padding:16px }
+    .grid{ display:grid; gap:22px; grid-template-columns: 1fr; }
+    iframe{ width:100%; aspect-ratio:16/9; border:none; border-radius:12px; box-shadow:0 0 18px rgba(230,195,77,.35) }
+    a.back{ display:inline-block; margin:16px auto 6px; color:#e6c34d; text-decoration:none; border:1px solid #e6c34d; padding:8px 14px; border-radius:8px }
+    a.back:hover{ background:#e6c34d; color:#000 }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <header>Μουσική · Αγατα Καρλ</header>
+
+  <div class="wrap">
+    <a class="back" href="index.html">« Πίσω στην Αρχική</a>
+
+    <div class="grid" style="margin-top:12px">
+      <!-- Evanescence — Bring Me To Life -->
+      <iframe src="https://www.youtube.com/embed/3YxaaGgTQYM"
+        title="Evanescence — Bring Me To Life" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+
+      <!-- P!nk — So What -->
+      <iframe src="https://www.youtube.com/embed/FJfFZqTlWrQ"
+        title="P!nk — So What" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+
+      <!-- Eminem — Lose Yourself -->
+      <iframe src="https://www.youtube.com/embed/_Yhyp-_hX2s"
+        title="Eminem — Lose Yourself" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+
+    <p style="color:#cfc6a4; margin:22px 0 40px">
+      Τα παραπάνω παίζουν νόμιμα μέσω YouTube (επίσημα κανάλια/αδειοδοτημένο περιεχόμενο).
+    </p>
+  </div>
+</body>
+</html>
