@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Агата Карл — Νύχτα & Αστέρια</title>
 <style>
-  :root{
-    --gold:#e9c86b;
-    --bg:#000;
-  }
+  :root{ --gold:#e9c86b; --bg:#000; }
   *{box-sizing:border-box}
   body{
     margin:0; background:#000 url('https://www.transparenttextures.com/patterns/stardust.png');
     color:#f5f5f5; font-family:Georgia,serif; text-align:center;
   }
+  a{color:var(--gold)}
   header{color:var(--gold); font-size:42px; padding:24px 12px}
   nav{margin:6px 0 24px}
   nav button{
@@ -26,37 +24,27 @@
   h3{margin:14px 0 8px}
   .quote{font-style:italic; opacity:.9}
   img{
-    width: min(900px,92vw); height:auto; border-radius:12px;
-    box-shadow:0 0 16px rgba(233,200,107,.35); margin:10px auto;
-    display:block;
+    width:min(900px,92vw); height:auto; border-radius:12px;
+    box-shadow:0 0 16px rgba(233,200,107,.35); margin:10px auto; display:block;
   }
 
-  /* --- Audio player (hidden video) --- */
-  #yt-hidden{
-    position:absolute; width:1px; height:1px; opacity:0;
-    pointer-events:none; left:-9999px; top:-9999px;
-  }
-  /* Floating music button */
+  /* AUDIO-ONLY YOUTUBE */
+  #yt-hidden{position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; left:-9999px; top:-9999px;}
   #musicFab{
     position:fixed; right:16px; bottom:16px; z-index:9999;
-    background:linear-gradient(135deg,#facf6b,#e0aa2b);
-    color:#111; border:none; border-radius:999px; padding:12px 16px;
+    background:linear-gradient(135deg,#facf6b,#e0aa2b); color:#111;
+    border:none; border-radius:999px; padding:12px 16px;
     box-shadow:0 8px 24px rgba(0,0,0,.35); font-weight:700; cursor:pointer;
   }
   #musicFab small{opacity:.8; font-weight:500}
-
-  /* Slide-up sheet */
   #sheet{
-    position:fixed; left:0; right:0; bottom:-70vh; height:60vh; z-index:9998;
+    position:fixed; left:0; right:0; bottom:0; height:60vh; z-index:9998;
     background:rgba(0,0,0,.94); border-top:1px solid var(--gold);
-    box-shadow:0 -12px 30px rgba(0,0,0,.5); transition:transform .35s ease;
-    transform:translateY(100%);
+    box-shadow:0 -12px 30px rgba(0,0,0,.5); transform:translateY(100%);
+    transition:transform .35s ease;
   }
   #sheet.open{transform:translateY(0)}
-  #sheetHeader{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 16px; color:var(--gold); font-size:20px;
-  }
+  #sheetHeader{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; color:var(--gold); font-size:20px}
   #tracklist{padding:0 12px 16px; max-width:780px; margin:0 auto}
   #tracklist button{
     display:block; width:100%; margin:8px auto; padding:10px 14px;
@@ -77,11 +65,13 @@
     <button onclick="jump('contact')">Επικοινωνία</button>
   </nav>
 
+  <!-- ΣΧΕΤΙΚΑ -->
   <section id="about">
     <h2>Σχετικά</h2>
     <p>Γράφω, φωτογραφίζω και συλλέγω μικρές νυχτερινές στιγμές. Αυτό το site είναι το προσωπικό μου ημερολόγιο εικόνων και κειμένων με μυστικιστική αισθητική.</p>
   </section>
 
+  <!-- ΦΩΤΟΓΡΑΦΙΕΣ -->
   <section id="photos">
     <h2>Φωτογραφίες</h2>
 
@@ -96,20 +86,19 @@
     <img src="img/file_00000000eeac61f59f174b574cf32a2d.png" alt="Λογότυπο με γάτα και φεγγάρι">
   </section>
 
+  <!-- ΕΠΙΚΟΙΝΩΝΙΑ -->
   <section id="contact">
     <h2>Επικοινωνία</h2>
     <p>Email: <a href="mailto:Agathikarlidu@gmail.com">Agathikarlidu@gmail.com</a></p>
   </section>
 
-  <!-- Hidden YouTube player (audio only) -->
+  <!-- HIDDEN YT PLAYER -->
   <div id="yt-hidden"></div>
 
-  <!-- Floating button -->
-  <button id="musicFab" onclick="toggleSheet()">
-    ♪ Μουσική <small>Night Mood</small>
-  </button>
+  <!-- FLOATING MUSIC BUTTON -->
+  <button id="musicFab" onclick="toggleSheet()">♪ Μουσική <small>Night Mood</small></button>
 
-  <!-- Slide-up sheet with tracklist -->
+  <!-- SLIDE-UP SHEET -->
   <div id="sheet" aria-hidden="true">
     <div id="sheetHeader">
       <div>Μουσική — Night Mood</div>
@@ -123,7 +112,7 @@
     // Smooth scroll
     function jump(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 
-    // Playlist (σωστά ids)
+    // Playlist με τα σωστά video IDs
     const playlist = [
       { id:'3YxaaGgTQYM', title:'Evanescence — Bring Me to Life' },
       { id:'FJfFZqTlWrQ', title:'Pink — So What' },
@@ -131,14 +120,13 @@
     ];
     let current = 0, player, firstUnmuteDone = false;
 
-    // Build track buttons
+    // Χτίζουμε τη λίστα
     function buildTracks(){
       const box = document.getElementById('tracklist');
       box.innerHTML = '';
       playlist.forEach((t,i)=>{
         const b=document.createElement('button');
-        b.id='t'+i; b.textContent=t.title;
-        b.onclick=()=>load(i,true);
+        b.id='t'+i; b.textContent=t.title; b.onclick=()=>load(i,true);
         box.appendChild(b);
       });
       updateActive();
@@ -152,20 +140,26 @@
     }
     function load(i,user){
       current = (i+playlist.length)%playlist.length;
-      if(player){ player.loadVideoById(playlist[current].id); if(user){ player.unMute(); firstUnmuteDone=true; } }
+      if(player){
+        player.loadVideoById(playlist[current].id);
+        if(user){ player.unMute(); firstUnmuteDone=true; }
+      }
       updateActive();
     }
 
-    // Floating sheet
+    // Sheet open/close
     function toggleSheet(){
       const s=document.getElementById('sheet');
       const open = !s.classList.contains('open');
       s.classList.toggle('open', open);
       s.setAttribute('aria-hidden', open? 'false':'true');
-      if(open && player){ player.playVideo(); if(!firstUnmuteDone){ player.unMute(); firstUnmuteDone=true; } }
+      if(open && player){
+        player.playVideo();
+        if(!firstUnmuteDone){ player.unMute(); firstUnmuteDone=true; }
+      }
     }
 
-    // YouTube API ready
+    // YouTube API callback
     window.onYouTubeIframeAPIReady = function(){
       player = new YT.Player('yt-hidden',{
         videoId: playlist[current].id,
@@ -179,5 +173,4 @@
   </script>
   <script src="https://www.youtube.com/iframe_api"></script>
 </body>
-</html>
-       
+</html>      
