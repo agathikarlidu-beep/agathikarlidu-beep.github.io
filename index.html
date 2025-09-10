@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
@@ -48,13 +48,31 @@
 
     /* Αιωρούμενο κουμπί μουσικής */
     .music-fab{
-      position:fixed; right:14px; bottom:16px; z-index:3;
+      position:fixed; right:14px; bottom:16px; z-index:30;
       background:rgba(230,195,77,.12); color:var(--gold);
       border:1px solid var(--gold); border-radius:999px;
       padding:10px 14px; text-decoration:none; backdrop-filter:blur(6px);
-      box-shadow:0 0 18px rgba(230,195,77,.35);
+      box-shadow:0 0 18px rgba(230,195,77,.35); cursor:pointer;
     }
     .music-fab:hover{ background:var(--gold); color:#000; }
+
+    /* Docked player */
+    .player-dock{
+      position:fixed; right:12px; bottom:66px; width:320px; max-width:92vw;
+      background:rgba(10,10,10,.85); border:1px solid rgba(230,195,77,.5);
+      border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,.6), 0 0 20px rgba(230,195,77,.25);
+      overflow:hidden; z-index:40; transform:translateY(20px); opacity:0; pointer-events:none;
+      transition:.3s ease;
+    }
+    .player-dock.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+    .player-top{ display:flex; align-items:center; justify-content:space-between; padding:8px 10px; }
+    .player-top b{ color:var(--ink); font-weight:600; font-size:.95em }
+    .player-top button{
+      background:transparent; border:1px solid var(--gold); color:var(--gold);
+      border-radius:8px; padding:4px 8px; cursor:pointer;
+    }
+    .player-wrap{ aspect-ratio:16/9; width:100%; background:#000; }
+    iframe{ width:100%; height:100%; border:0; display:block }
   </style>
 </head>
 <body>
@@ -65,7 +83,8 @@
   <nav>
     <a href="#about">Σχετικά</a>
     <a href="#photos">Φωτογραφίες</a>
-    <a href="music.html" target="_blank" rel="noopener">Μουσική</a>
+    <!-- Αν έχεις tarot.html και θες να μη σταματά η μουσική, άνοιξέ το σε νέο tab -->
+    <a href="tarot.html" target="_blank" rel="noopener">Ταρώ</a>
     <a href="#contact">Επικοινωνία</a>
   </nav>
 
@@ -81,7 +100,7 @@
   <section id="photos">
     <h2>Φωτογραφίες</h2>
     <div class="gallery">
-      <!-- Άγγελος & Δαίμονας (relative path) -->
+      <!-- Άγγελος & Δαίμονας -->
       <img src="img/img/file_0000000052c61f486149775d65a9ddc.png" alt="Άγγελος και Δαίμονας">
       <p>Άγγελος και Δαίμονας</p>
 
@@ -103,20 +122,59 @@
 
   <footer>© <span id="y"></span> Агата Карл — Νύχτα & Αστέρια</footer>
 
-  <!-- Αιωρούμενο κουμπί μουσικής -->
-  <a class="music-fab" href="music.html" target="_blank" rel="noopener">▶ Παίξε μουσική</a>
+  <!-- Αιωρούμενο κουμπί μουσικής (μένεις στη σελίδα) -->
+  <button class="music-fab" id="openPlayer">▶ Παίξε μουσική</button>
+
+  <!-- Docked YouTube player -->
+  <div class="player-dock" id="playerDock">
+    <div class="player-top">
+      <b>Μουσική — Night Mood</b>
+      <button id="closePlayer">✕ Κλείσιμο</button>
+    </div>
+    <div class="player-wrap">
+      <!-- Θα γεμίσει με src όταν πατήσεις το κουμπί -->
+      <iframe id="ytFrame"
+        title="Music Player"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
+    </div>
+  </div>
 
   <script>
     // έτος
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // fade-in όταν μπαίνουν στο viewport
+    // fade-in για gallery
     const items = document.querySelectorAll('.gallery img, .gallery p, .quote');
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
     }, {threshold:.2});
     items.forEach(el=>io.observe(el));
+
+    // Mini player logic
+    const openBtn = document.getElementById('openPlayer');
+    const closeBtn = document.getElementById('closePlayer');
+    const dock    = document.getElementById('playerDock');
+    const frame   = document.getElementById('ytFrame');
+
+    // Βάλε εδώ Ο,ΤΙ YouTube θέλεις (επίσημα κανάλια/νόμιμα embeds).
+    // Προεπιλογή: Lofi Girl stream (χαλαρό, επιτρέπεται embed).
+    const YT_URL = "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&mute=0&rel=0";
+
+    openBtn.addEventListener('click', () => {
+      if (!frame.src) frame.src = YT_URL; // πρώτο πάτημα: γεμίζει src + παίζει
+      dock.classList.add('open');
+    });
+    closeBtn.addEventListener('click', () => {
+      dock.classList.remove('open');
+      // σταμάτα τον ήχο καθαρίζοντας το src
+      const s = frame.src;
+      frame.src = "";
+      // μικρό delay και επαναφορά ώστε στο επόμενο άνοιγμα να ξεκινά από την αρχή
+      setTimeout(()=> { frame.src = s.replace("autoplay=1","autoplay=1"); }, 0);
+    });
   </script>
 </body>
 </html>
-      
